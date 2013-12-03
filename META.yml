@@ -17,6 +17,10 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: App-s2p
+provides:
+  App::s2p:
+    file: script/s2p
+    version: 1.001
 requires:
   Symbol: 0
   integer: 0
@@ -25,7 +29,7 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-s2p
   repository: git://github.com/Leont/app-s2p.git
-version: 1.000
+version: 1.001
 x_Dist_Zilla:
   perl:
     version: 5.018001
@@ -87,21 +91,17 @@ x_Dist_Zilla:
       name: PruneFiles
       version: 5.006
     -
-      class: Dist::Zilla::Plugin::Git::Check
-      name: '@Git/Check'
-      version: 2.014
-    -
-      class: Dist::Zilla::Plugin::Git::Commit
-      name: '@Git/Commit'
-      version: 2.014
-    -
-      class: Dist::Zilla::Plugin::Git::Tag
-      name: '@Git/Tag'
-      version: 2.014
-    -
-      class: Dist::Zilla::Plugin::Git::Push
-      name: '@Git/Push'
-      version: 2.014
+      class: Dist::Zilla::Plugin::MetaProvides::Package
+      config:
+        Dist::Zilla::Plugin::MetaProvides::Package:
+          finder:
+            - ExecDir
+        Dist::Zilla::Role::MetaProvider::Provider:
+          inherit_missing: 1
+          inherit_version: 1
+          meta_noindex: 1
+      name: MetaProvides::Package
+      version: 1.15000000
     -
       class: Dist::Zilla::Plugin::CheckChangesHasContent
       name: CheckChangesHasContent
@@ -134,6 +134,22 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::NextRelease
       name: NextRelease
       version: 5.006
+    -
+      class: Dist::Zilla::Plugin::Git::Check
+      name: '@Git/Check'
+      version: 2.014
+    -
+      class: Dist::Zilla::Plugin::Git::Commit
+      name: '@Git/Commit'
+      version: 2.014
+    -
+      class: Dist::Zilla::Plugin::Git::Tag
+      name: '@Git/Tag'
+      version: 2.014
+    -
+      class: Dist::Zilla::Plugin::Git::Push
+      name: '@Git/Push'
+      version: 2.014
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: PkgVersion

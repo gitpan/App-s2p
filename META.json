@@ -37,6 +37,12 @@
          }
       }
    },
+   "provides" : {
+      "App::s2p" : {
+         "file" : "script/s2p",
+         "version" : "1.001"
+      }
+   },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
@@ -49,7 +55,7 @@
          "web" : "https://github.com/Leont/app-s2p"
       }
    },
-   "version" : "1.000",
+   "version" : "1.001",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018001"
@@ -126,24 +132,21 @@
             "version" : "5.006"
          },
          {
-            "class" : "Dist::Zilla::Plugin::Git::Check",
-            "name" : "@Git/Check",
-            "version" : "2.014"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Commit",
-            "name" : "@Git/Commit",
-            "version" : "2.014"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Tag",
-            "name" : "@Git/Tag",
-            "version" : "2.014"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Git::Push",
-            "name" : "@Git/Push",
-            "version" : "2.014"
+            "class" : "Dist::Zilla::Plugin::MetaProvides::Package",
+            "config" : {
+               "Dist::Zilla::Plugin::MetaProvides::Package" : {
+                  "finder" : [
+                     "ExecDir"
+                  ]
+               },
+               "Dist::Zilla::Role::MetaProvider::Provider" : {
+                  "inherit_missing" : "1",
+                  "inherit_version" : "1",
+                  "meta_noindex" : "1"
+               }
+            },
+            "name" : "MetaProvides::Package",
+            "version" : "1.15000000"
          },
          {
             "class" : "Dist::Zilla::Plugin::CheckChangesHasContent",
@@ -184,6 +187,26 @@
             "class" : "Dist::Zilla::Plugin::NextRelease",
             "name" : "NextRelease",
             "version" : "5.006"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Check",
+            "name" : "@Git/Check",
+            "version" : "2.014"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Commit",
+            "name" : "@Git/Commit",
+            "version" : "2.014"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Tag",
+            "name" : "@Git/Tag",
+            "version" : "2.014"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Git::Push",
+            "name" : "@Git/Push",
+            "version" : "2.014"
          },
          {
             "class" : "Dist::Zilla::Plugin::PkgVersion",

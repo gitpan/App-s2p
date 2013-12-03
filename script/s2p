@@ -7,7 +7,7 @@
 
 package App::s2p;
 {
-  $App::s2p::VERSION = '1.000';
+  $App::s2p::VERSION = '1.001';
 }
 
 use strict;
